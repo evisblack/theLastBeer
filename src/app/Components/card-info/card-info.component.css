@@ -1,0 +1,51 @@
+.card-img-top {
+    padding-top: 1em;
+    width: 100%;  /* Asegura que la imagen cubra todo el ancho del contenedor */
+    height: 300px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Mantiene la proporción de la imagen sin recortarla */
+    background-color: #f8f9fa; /* Color de fondo en caso de que la imagen no cubra todo el espacio */
+  }
+  .avatar-header-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-md-4 {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .example-card mat-card-content {
+    flex-grow: 1;
+  }
+  
+  .example-card mat-card-actions {
+    justify-content: flex-end;
+  }
+  .title {
+    font-size: 1.25rem; /* Tamaño de fuente base */
+    font-weight: 600;
+    line-height: 1.2;
+    min-height: 1.2 *2em;
+    max-height: 1.2 *2em; /* Limitar a dos líneas (1.2 * 2) */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Limitar a dos líneas */
+  }

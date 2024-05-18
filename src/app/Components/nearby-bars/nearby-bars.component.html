@@ -1,12 +1,57 @@
-<div id="map" style="height: 400px; width: 100%;"></div>
+<div class="row mt-3">
+  <div class="col-sm-6">
+    <mat-form-field appearance="fill">
+      <mat-label>Distancia</mat-label>
+      <input matInput placeholder="500 metros" [(ngModel)]="radius">
+      <span matTextSuffix>&nbsp; metros</span>
+      <mat-hint>¿Cuantos te apetece andar?</mat-hint>
+    </mat-form-field>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>¿Qué buscas?</mat-label>
+      <input matInput placeholder="Cerveza" [(ngModel)]="keyword">
+      <mat-hint>Palabra clave</mat-hint>
+    </mat-form-field> -->
+  </div>
+  <div class="col-sm-6">
+    <mat-form-field>
+      <mat-label>Tipo de Garito:</mat-label>
+      <mat-select [(value)]="keyword">
+        <mat-option value="Cerveza, beer">Cerveza</mat-option>
+        <mat-option value="Bar">Bar</mat-option>
+        <mat-option value="Restaurante">Restaurante</mat-option>
+        <mat-option value="Comida">Comida</mat-option>
+        <mat-option value="Pub">Pub</mat-option>
+        <mat-option value="Hotel">Lo que sea....</mat-option>
+      </mat-select>
+      <mat-hint>¿Qué buscas?</mat-hint>
+    </mat-form-field>
+    <div *ngIf="error" class="primary">{{ error }}</div>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="d-grid gap-2 col-6">
+    <button class="btn btn-lg test" type="button" routerLink="/mini-juego">¿ES BUENA IDEA?</button>
+  </div>
+  <div class="d-grid gap-2 col-6">
+    <button class="btn search btn-lg" type="button" (click)="initMap()" [disabled]="isButtonDisabled()">A POR LA BIRRA</button>
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="col-md-12" id="map" style="height: 400px; width: 100%;"></div>
+</div>
+<div class="row mt-4">
+  <div class="col-md-12">
+    <p>{{textoBusqueda}}</p>
+  </div>
+</div>
 <div *ngIf="bars.length > 0">
-  <h2>Bares Cercanos Abiertos</h2>
+  <app-card-info [bars]="bars"></app-card-info>
+
+  <!-- <h2>Bares Cercanos Abiertos</h2>
   <ul>
     <li *ngFor="let bar of bars">
       {{ bar.name }} - {{ bar.vicinity }}
     </li>
-  </ul>
+  </ul> -->
 </div>
-<div *ngIf="bars.length === 0">
-  <p>No se encontraron bares abiertos cercanos.</p>
-</div>
+

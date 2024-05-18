@@ -1,0 +1,25 @@
+<div class="container mt-3">
+    <div class="row">
+      <div class="col-md-4 mb-3 d-flex align-items-stretch" *ngFor="let bar of bars">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title class="title">{{ bar.name }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image class="card-img-top"  [src]="bar.photos ? bar.photos[0].getUrl() : 'assets/img/coctel.png'" alt="Photo of a {{ bar.name }}">
+          <mat-card-content>
+            <mat-card-subtitle>{{ bar.vicinity }}</mat-card-subtitle>
+            <p>
+              {{ bar.opening_hours?.isOpen() ? 'Abierto ahora' : 'Cerrado ahora' }}<br>
+              Horario de cierre: {{ getClosingTime(bar) }}<br>
+              Valoración: {{ bar.rating ?? 'N/A' }}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  

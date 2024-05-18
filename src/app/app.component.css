@@ -1,0 +1,18 @@
+:host {
+    --content-padding: 1em;
+  }
+  header {
+    display: block;
+    /*height: 90px;*/
+    padding: var(--content-padding);
+    box-shadow: 0px 5px 25px var(--shadow-color);
+    background-color: var(--header-color);
+  }
+  header h1{
+    font-family: 'Inter', sans-serif;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+  .content {
+    padding: var(--content-padding);
+  }
