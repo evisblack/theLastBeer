@@ -1,0 +1,12 @@
+<div id="map" style="height: 400px; width: 100%;"></div>
+<div *ngIf="bars.length > 0">
+  <h2>Bares Cercanos Abiertos</h2>
+  <ul>
+    <li *ngFor="let bar of bars">
+      {{ bar.name }} - {{ bar.vicinity }}
+    </li>
+  </ul>
+</div>
+<div *ngIf="bars.length === 0">
+  <p>No se encontraron bares abiertos cercanos.</p>
+</div>
