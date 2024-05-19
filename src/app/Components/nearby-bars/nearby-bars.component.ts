@@ -4,6 +4,7 @@ import { MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { CardInfoComponent } from '../card-info/card-info.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-nearby-bars',
@@ -13,7 +14,8 @@ import { CardInfoComponent } from '../card-info/card-info.component';
     MatSelectModule, 
     MatInputModule, 
     FormsModule,
-    CardInfoComponent  
+    CardInfoComponent,
+    MatProgressSpinnerModule  
   ],
   templateUrl: './nearby-bars.component.html',
   styleUrls: ['./nearby-bars.component.css']
@@ -22,11 +24,12 @@ export class NearbyBarsComponent implements OnInit {
   error: string = '';
   radius: number = 500;
   keyword: string = 'Cerveza';
+  barDetails: any[] = [];
   bars: google.maps.places.PlaceResult[] = [];
   map: google.maps.Map;
   service: google.maps.places.PlacesService;
   infoWindow: google.maps.InfoWindow;
-  textoBusqueda: string = '';
+  loading: boolean = false;
 
   constructor() {}
 
@@ -35,8 +38,8 @@ export class NearbyBarsComponent implements OnInit {
 
   initMap(): void {
     if (navigator.geolocation) {
+      this.loading = true;
       navigator.geolocation.getCurrentPosition((position) => {
-        this.textoBusqueda = 'Buscando....'
         const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
         this.map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
@@ -57,15 +60,21 @@ export class NearbyBarsComponent implements OnInit {
         this.service.nearbySearch(request, (results, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK && results) {
             this.bars = results;
-            this.bars.length === 0 ? this.textoBusqueda = 'No se encontraron bares abiertos cercanos.': this.textoBusqueda = '';
-            this.bars.forEach(bar => {
-              this.createMarker(bar);
+            results.forEach(bar => {
+              this.service.getDetails({ placeId: bar.place_id }, (details, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK && details) {
+                  this.barDetails.push(details);
+                  this.createMarker(details);
+                }
+              });
             });
           }
+          this.loading = false;
         });
       });
     } else {
       console.error('Geolocation is not supported by this browser.');
+      this.loading = false;
     }
   }
 

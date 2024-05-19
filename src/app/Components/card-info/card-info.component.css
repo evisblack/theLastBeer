@@ -1,5 +1,5 @@
 .card-img-top {
-    padding-top: 1em;
+    padding: 1em;
     width: 100%;  /* Asegura que la imagen cubra todo el ancho del contenedor */
     height: 300px; /* Altura fija para todas las imágenes */
     object-fit: cover; /* Mantiene la proporción de la imagen sin recortarla */
@@ -28,6 +28,11 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+  }
+
+  .turquesa-bold{
+    color: #00ADB5;
+    font-weight: bold;
   }
   
   .example-card mat-card-content {
