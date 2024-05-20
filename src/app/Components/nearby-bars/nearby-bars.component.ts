@@ -30,6 +30,7 @@ export class NearbyBarsComponent implements OnInit {
   service: google.maps.places.PlacesService;
   infoWindow: google.maps.InfoWindow;
   loading: boolean = false;
+  disabled: boolean = false;
 
   constructor() {}
 
@@ -39,6 +40,7 @@ export class NearbyBarsComponent implements OnInit {
   initMap(): void {
     if (navigator.geolocation) {
       this.loading = true;
+      this.disabled = true;
       navigator.geolocation.getCurrentPosition((position) => {
         const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -63,18 +65,20 @@ export class NearbyBarsComponent implements OnInit {
             results.forEach(bar => {
               this.service.getDetails({ placeId: bar.place_id }, (details, status) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK && details) {
-                  this.barDetails.push(details);
+                  this.barDetails.push({ ...details, isFavorite: false});
                   this.createMarker(details);
                 }
               });
             });
           }
           this.loading = false;
+          this.disabled = false;
         });
       });
     } else {
       console.error('Geolocation is not supported by this browser.');
       this.loading = false;
+      this.disabled = false;
     }
   }
 
@@ -89,16 +93,16 @@ export class NearbyBarsComponent implements OnInit {
     google.maps.event.addListener(marker, 'click', () => {
       this.service.getDetails({ placeId: place.place_id }, (details, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK && details) {
-          const isOpen = details.opening_hours?.isOpen() ? 'Sí' : 'No';
+          const isOpen = details.opening_hours?.isOpen() ? 'Abierto' : 'Cerrado';
+          const isOpenColor = details.opening_hours?.isOpen() ? 'green' : 'red';
           const content = `
             <div>
               <h3>${details.name}</h3>
               <p><strong>Dirección:</strong> ${details.vicinity}</p>
-              <p><strong>Tipo:</strong> ${details.types?.join(', ')}</p>
-              <p><strong>Valoración:</strong> ${details.rating ?? 'N/A'}</p>
-              <p><strong>Abierto ahora:</strong> ${isOpen}</p>
-              <p><strong>Horario de cierre:</strong> ${this.getClosingTime(details)}</p>
-            </div>
+              <p><strong>Horario de cierre:</strong> ${this.getClosingTime(details)}h</p>
+              <strong style="color:${isOpenColor};">${isOpen}</strong>
+              <p><strong>Valoración:</strong> ${details.rating ?? 'N/A'}</p>   
+              </div>
           `;
           this.infoWindow.setContent(content);
           this.infoWindow.open(this.map, marker);

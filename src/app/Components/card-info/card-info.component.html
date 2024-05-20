@@ -1,38 +1,40 @@
 <div class="container mt-3">
-    <div class="row">
-      <div class="col-md-4 mb-3 d-flex align-items-stretch" *ngFor="let bar of bars">
-        <mat-card class="example-card">
-          <!-- <mat-card-header>
-            <mat-card-title class="title">{{ bar.name }}</mat-card-title>
-          </mat-card-header> -->
-          <img mat-card-image class="card-img-top"  [src]="bar.photos ? bar.photos[0].getUrl() : 'assets/img/coctel.png'" alt="Photo of a {{ bar.name }}">
-          <mat-card-content>
-            <h3 class="card-title fw-bold">{{ bar.name }}</h3>
-            <p class="card-text">{{ bar.vicinity }}</p>
-            <p class="card-text turquesa-bold">{{ getTodaySchedule(bar.opening_hours) }}</p>
-            <!-- <p class="card-text">{{getWeekdayTextForToday(bar.opening_hours)}}</p> -->
-            <p class="card-text">Rating: {{ bar.rating }}</p>
-            <p>
-              Valoración:
-            <span *ngFor="let star of getStars(bar.rating)">
-              <img *ngIf="star.type === 'filled'" src="assets/img/star.png" class="star">
-              <img *ngIf="star.type === 'empty'" src="assets/img/empty-star.png" class="star">
+  <div class="row">
+    <div class="col-md-4 mb-3 d-flex align-items-stretch" *ngFor="let bar of bars">
+      <mat-card class="example-card">
+        <img mat-card-image class="card-img-top" [src]="bar.photos ? bar.photos[0].getUrl() : 'assets/img/coctel.png'" alt="Photo of a {{ bar.name }}">
+        <mat-card-content>
+          <h3 class="card-title fw-bold">
+            {{ bar.name }}
+            <mat-icon *ngIf="bar.isFavorite" class="favorite-icon">favorite</mat-icon>
+          </h3>
+          <p class="card-text">
+            <mat-icon aria-hidden="false" aria-label="location" fontIcon="room" class="me-2"></mat-icon>
+            {{ bar.vicinity }}
+          </p>
+          <p class="card-text turquesa-bold d-flex align-items-center">
+            <mat-icon aria-hidden="false" aria-label="timetable" fontIcon="query_builder" class="me-2"></mat-icon>
+            {{ getTodaySchedule(bar.opening_hours) }}
+          </p>
+          <p class="rating-container d-flex align-items-center">
+            <span class="rating-circle me-2">{{ bar.rating ?? 'N/A' }}</span>
+            <span class="rating-stars">
+              <span *ngFor="let star of getStars(bar.rating)">
+                <img *ngIf="star.type === 'filled'" src="assets/img/star.png" class="star">
+                <img *ngIf="star.type === 'half'" src="assets/img/half-star.png" class="star">
+                <img *ngIf="star.type === 'empty'" src="assets/img/empty-star.png" class="star">
+              </span>
             </span>
-            ({{ bar.rating ?? 'N/A' }})
-            </p>
-            <!-- <mat-card-subtitle>{{ bar.vicinity }}</mat-card-subtitle>
-            <p>
-              {{ bar.opening_hours?.isOpen() ? 'Abierto ahora' : 'Cerrado ahora' }}<br>
-              Horario de cierre: {{ getClosingTime(bar) }}<br>
-              Valoración: {{ bar.rating ?? 'N/A' }}
-            </p> -->
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="favorite-button me-2" (click)="toggleFavorite(bar)">
+            <mat-icon style="color:white">favorite</mat-icon>
+            <span style="color:white">Love it!</span>
+          </button>
+          <a mat-button class="vamos-button" [href]="bar.url" target="_blank" style="color:white">¡Vamos!</a>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
-  
+</div>

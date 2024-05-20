@@ -5,14 +5,6 @@
     object-fit: cover; /* Mantiene la proporción de la imagen sin recortarla */
     background-color: #f8f9fa; /* Color de fondo en caso de que la imagen no cubra todo el espacio */
   }
-  .avatar-header-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
   
   .row {
     display: flex;
@@ -53,4 +45,111 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2; /* Limitar a dos líneas */
+  }
+
+  .example-header-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .card-img-top {
+    padding-top: 1em;
+    width: 100%;  /* Asegura que la imagen cubra todo el ancho del contenedor */
+    height: 300px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Mantiene la proporción de la imagen sin recortarla */
+    background-color: #f8f9fa; /* Color de fondo en caso de que la imagen no cubra todo el espacio */
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-md-4 {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: left; /* Asegura que el contenido del card esté alineado a la izquierda */
+  }
+  
+  .example-card mat-card-content {
+    flex-grow: 1;
+  }
+  
+  .example-card mat-card-actions {
+    justify-content: flex-end;
+  }
+  
+  .star {
+    width: 20px; /* Ajusta el tamaño de las estrellas */
+    height: 20px;
+    margin-right: 2px;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .me-2 {
+    margin-right: 0.5rem; /* Ajusta el margen derecho del icono */
+  }
+  
+  .card-text {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mat-card-content h3,
+  .mat-card-content p {
+    margin: 0;
+  }
+  
+  .rating-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rating-stars {
+    display: flex;
+  }
+  
+  .rating-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    font-weight: bold;
+  }
+  
+  .favorite-button {
+    color: white;
+    background-color: #b5002a;
+  }
+  
+  .vamos-button {
+    color: white;
+    background-color: #00ADB5;
+    text-decoration: none;
+  }
+
+  .favorite-icon {
+    color: red;
+    vertical-align: middle;
+    margin-left: 5px;
   }

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-card-info',
@@ -9,20 +10,25 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './card-info.component.html',
   styleUrls: ['./card-info.component.css']
 })
 export class CardInfoComponent {
   @Input() bars: any[] = [];
+  toggleFavorite(bar: any): void {
+    bar.isFavorite = !bar.isFavorite;
+  }
 
   getTodaySchedule(openingHours: any): string {
     if (!openingHours || !openingHours.weekday_text) {
       return 'N/A';
     }
     const today = new Date().getDay();
-    return openingHours.weekday_text[today];
+    const correctedDay = today === 0 ? 6 : today - 1;
+    return openingHours.weekday_text[correctedDay];
   }
 
   formatTime(time: string): string {
@@ -55,12 +61,15 @@ export class CardInfoComponent {
   getStars(rating: number): any[] {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (i < rating) {
+      if (i < Math.floor(rating)) {
         stars.push({ type: 'filled' });
+      } else if (i < Math.ceil(rating)) {
+        stars.push({ type: 'half' });
       } else {
         stars.push({ type: 'empty' });
       }
     }
     return stars;
   }
+
 }
