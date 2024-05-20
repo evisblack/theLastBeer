@@ -1,0 +1,21 @@
+<div *ngIf="data.puntuacion>=500">
+    <h2 mat-dialog-title class="text-center">Enhorabuena!</h2>
+<mat-dialog-content>
+  <p class="text-center"><img src="assets/img/bien.png" alt=""></p>
+  <p class="text-center">Puedes ir a por otra birra</p>
+</mat-dialog-content>
+ </div>
+ <div *ngIf="data.puntuacion<500">
+    <h2 mat-dialog-title class="text-center mt-3"><img src="assets/img/mal.png" alt="mal"></h2>
+<mat-dialog-content>
+  <p class="fw-bold text-center">¿No crees que ya has bebido suficiente?</p>
+  <p class="text-center">Es momento de dejar esa birra para otro dia</p>
+  <p class="fw-bold text-center">¡ANDA Y TIRA PARA CASA!</p>
+</mat-dialog-content>
+ </div>
+
+<mat-dialog-actions>
+    <button type="button" class="btn test mx-2"  (click)="onNoClick()">Repetir</button>
+  <button type="button" class="btn search" [mat-dialog-close]="data.puntuacion" cdkFocusInitial (click)="cerrar()">Ok</button>
+</mat-dialog-actions>
+

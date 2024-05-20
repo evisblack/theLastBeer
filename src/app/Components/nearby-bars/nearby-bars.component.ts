@@ -5,6 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { CardInfoComponent } from '../card-info/card-info.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterModule } from '@angular/router';
+import { PuntuacionService } from '../../shared/puntuacion.service';
 
 @Component({
   selector: 'app-nearby-bars',
@@ -15,7 +17,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule, 
     FormsModule,
     CardInfoComponent,
-    MatProgressSpinnerModule  
+    MatProgressSpinnerModule,
+    RouterModule
   ],
   templateUrl: './nearby-bars.component.html',
   styleUrls: ['./nearby-bars.component.css']
@@ -31,10 +34,14 @@ export class NearbyBarsComponent implements OnInit {
   infoWindow: google.maps.InfoWindow;
   loading: boolean = false;
   disabled: boolean = false;
+  puntuacion: number = 0;
 
-  constructor() {}
+  constructor(private puntuacionService: PuntuacionService) {}
 
   ngOnInit(): void {
+    this.puntuacion = this.puntuacionService.getPuntuacion();
+    console.log("this.puntuacion:", this.puntuacion);
+    this.disabled = this.puntuacion <= 500;
   }
 
   initMap(): void {
@@ -100,7 +107,7 @@ export class NearbyBarsComponent implements OnInit {
               <h3>${details.name}</h3>
               <p><strong>Dirección:</strong> ${details.vicinity}</p>
               <p><strong>Horario de cierre:</strong> ${this.getClosingTime(details)}h</p>
-              <strong style="color:${isOpenColor};">${isOpen}</strong>
+              <p><strong style="color:${isOpenColor};">${isOpen}</strong></p>
               <p><strong>Valoración:</strong> ${details.rating ?? 'N/A'}</p>   
               </div>
           `;
