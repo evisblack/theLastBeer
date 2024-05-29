@@ -7,6 +7,8 @@ import { CardInfoComponent } from '../card-info/card-info.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { PuntuacionService } from '../../shared/puntuacion.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nearby-bars',
@@ -18,7 +20,9 @@ import { PuntuacionService } from '../../shared/puntuacion.service';
     FormsModule,
     CardInfoComponent,
     MatProgressSpinnerModule,
-    RouterModule
+    MatSlideToggleModule,
+    RouterModule,
+    MatIconModule
   ],
   templateUrl: './nearby-bars.component.html',
   styleUrls: ['./nearby-bars.component.css']
@@ -35,6 +39,7 @@ export class NearbyBarsComponent implements OnInit {
   loading: boolean = false;
   disabled: boolean = false;
   puntuacion: number = 0;
+  toggleChecked: boolean = false;
 
   constructor(private puntuacionService: PuntuacionService) {}
 
@@ -133,7 +138,7 @@ export class NearbyBarsComponent implements OnInit {
     return `${hours}:${minutes}`;
   }
 
-  isButtonDisabled(){
-    return false;
+  onToggleChange(): void {
+    this.disabled = !this.toggleChecked;
   }
 }
