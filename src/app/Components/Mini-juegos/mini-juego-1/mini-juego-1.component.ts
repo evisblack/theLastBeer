@@ -10,7 +10,7 @@ import { PuntuacionService } from '../../../shared/puntuacion.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './mini-juego-1.component.html',
-  styleUrl: './mini-juego-1.component.css'
+  styleUrl: '../mini-juegos-styles.css'
 })
 export class MiniJuego1Component implements OnInit{
   colors: string[] = ['red', 'blue', 'green', 'blueviolet'];

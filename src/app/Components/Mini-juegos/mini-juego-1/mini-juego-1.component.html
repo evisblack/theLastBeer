@@ -1,51 +1,26 @@
-<div class="container">
-    <div class="row">
-      <div class="col mt-2 text-center">
-        <h1 class="title">Colores VS Palabras</h1>
-        <h2>¿Cuál es el color de las letras? <span class="text-secondary">Elige sabiamente</span></h2>
+<div class="game-container">
+  <div class="header">
+    <h1 class="title">Colores VS Palabras</h1>
+    <h2 class="subtitle">¿Cuál es el color de las letras? <span class="highlight">Elige sabiamente</span></h2>
+  </div>
+  <div class="info">
+    <h2 class="timer">{{ tiempoRestante }} segundos</h2>
+    <div class="feedback">
+      <div class="alert alert-success" *ngIf="acierto">¡Correcto!</div>
+      <div class="alert alert-danger" *ngIf="error">¡Error!</div>
+    </div>
+    <h2 class="score">{{ puntuacion }} pts</h2>
+  </div>
+  <div class="colors-card">
+    <div class="card-header">
+      <h1 [style.color]="colores[correctColorIndex].color" class="color">{{ colores[selectedColorIndex].texto }}</h1>
+    </div>
+    <div class="card-body">
+      <div class="buttons-container">
+        <button class="btn" *ngFor="let color of colores; let i = index" (click)="checkAnswer(i)">
+          {{ color.texto }}
+        </button>
       </div>
     </div>
-    <div class="row d-flex align-items-center">
-      <div class="col-4">
-        <h2 class="text-left vt323-regular">{{ tiempoRestante }} segundos</h2>
-      </div>
-      <div class="col-4">
-        <div class="alert alert-success text-center fw-bold" role="alert" *ngIf="acierto">
-          ¡Correcto!
-        </div>
-        <div class="alert alert-danger text-center fw-bold" role="alert" *ngIf="error">
-          ¡Error!
-        </div>
-      </div>
-      <div class="col-4">
-        <h2 class="text-center vt323-regular">{{puntuacion}} pts</h2>
-      </div>
-    </div>
-      <div class="card">
-        <div class="card-header text-center">
-          <div class="d-flex justify-content-center align-items-center">
-          <h1 [style.color]="colores[correctColorIndex].color" class="color">{{ colores[selectedColorIndex].texto }}</h1>
-        </div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="d-grid gap-2 col-6">
-              <button class="btn btn-secondary btn-lg" *ngFor="let colores of colores.slice(0,2); let i = index" (click)="checkAnswer(i)">
-                {{ colores.texto}}
-              </button>
-            </div>
-            <div class="d-grid gap-2 col-6">
-              <button class="btn btn-secondary btn-lg" *ngFor="let colores of colores.slice(2,4); let i = index" (click)="checkAnswer(i+2)">
-                {{ colores.texto}}
-              </button>
-            </div>
-          </div>
-      </div>
-    </div>
-    </div>
-    
-      
-     
-    
-    
-  
+  </div>
+</div>

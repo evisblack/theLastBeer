@@ -1,0 +1,21 @@
+<div class="game-container">
+  <div class="header">
+    <h1 class="title">Memoria</h1>
+    <h2 class="subtitle">Encuentra las parejas <span class="highlight">¡Presta atención!</span></h2>
+  </div>
+  <div class="info">
+    <h2 class="timer">{{ tiempoRestante }} segundos</h2>
+    <h2 class="score">{{puntuacion}} pts</h2>
+  </div>
+  <div class="cards-container">
+    <div
+      class="card"
+      *ngFor="let card of cards"
+      [class.revealed]="card.revealed || card.matched"
+      (click)="selectCard(card)"
+    >
+      <img *ngIf="card.revealed || card.matched" [src]="card.image" />
+      <div *ngIf="!card.revealed && !card.matched" class="card-back"></div>
+    </div>
+  </div>
+</div>

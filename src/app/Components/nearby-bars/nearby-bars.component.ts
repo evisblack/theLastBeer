@@ -40,6 +40,7 @@ export class NearbyBarsComponent implements OnInit {
   disabled: boolean = false;
   puntuacion: number = 0;
   toggleChecked: boolean = false;
+  minijuegoRoute: string = "/mini-juego-1";
 
   constructor(private puntuacionService: PuntuacionService) {}
 
@@ -47,6 +48,9 @@ export class NearbyBarsComponent implements OnInit {
     this.puntuacion = this.puntuacionService.getPuntuacion();
     console.log("this.puntuacion:", this.puntuacion);
     this.disabled = this.puntuacion <= 500;
+    const routes = ['/mini-juego-1', '/mini-juego-2'];
+    const randomIndex = Math.floor(Math.random() * routes.length);
+    this.minijuegoRoute = routes[randomIndex];
   }
 
   initMap(): void {
