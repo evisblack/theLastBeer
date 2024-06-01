@@ -83,7 +83,7 @@ export class MiniJuego2Component implements OnInit{
         this.router.navigate(['/mini-juego-2']);
       }
       else{
-        this.router.navigate(['/home']       
+        this.router.navigate(['/']       
         );
       }
       

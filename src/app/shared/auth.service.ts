@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   private apiUrl = 'https://lastbeer-back.onrender.com/api/Users';
+  // private apiUrl = 'https://localhost:7093/api/Users';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
@@ -37,7 +38,7 @@ export class AuthService {
   }
 
   register(user: any) {
-    return this.http.post<any>(`${this.apiUrl}/register`, user);
+    return this.http.post<any>(`${this.apiUrl}/registro`, user);
   }
 }
 
