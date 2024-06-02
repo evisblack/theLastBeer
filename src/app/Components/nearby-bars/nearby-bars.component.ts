@@ -48,7 +48,7 @@ export class NearbyBarsComponent implements OnInit {
   constructor(private puntuacionService: PuntuacionService,  private barService: BarService) {}
 
   ngOnInit(): void {
-    const storedPuntuacion = localStorage.getItem('puntuacion');
+    const storedPuntuacion = sessionStorage.getItem('puntuacion');
     this.puntuacion = storedPuntuacion ? parseInt(storedPuntuacion, 10) : 0;
     this.userId = this.getUserIdFromLocalStorage();
     this.disabled = this.puntuacion <= 500;

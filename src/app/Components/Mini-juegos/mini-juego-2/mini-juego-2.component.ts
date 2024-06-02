@@ -29,10 +29,11 @@ export class MiniJuego2Component implements OnInit{
   ngOnInit(): void {
     this.initializeGame();
     this.userId = this.getUserIdFromLocalStorage();
+    sessionStorage.setItem('puntuacion', this.puntuacion.toString());
   }
 
   getUserIdFromLocalStorage(): number | null {
-    const storedUser = localStorage.getItem('currentUser');
+    const storedUser = sessionStorage.getItem('currentUser');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       return parsedUser?.result?.user?.id || null;
@@ -80,7 +81,7 @@ export class MiniJuego2Component implements OnInit{
   }
 
   openDialog(): void {
-    localStorage.setItem('puntuacion', this.puntuacion.toString());
+    sessionStorage.setItem('puntuacion', this.puntuacion.toString());
     // Guardar la puntuación en el backend si hay un usuario logeado
     if(this.userId){
       this.puntuacionService.saveScore(this.puntuacion, 2, this.userId).subscribe({
