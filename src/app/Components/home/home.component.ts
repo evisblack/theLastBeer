@@ -1,31 +1,42 @@
-import { Component } from '@angular/core';
-import { NearbyBarsComponent } from '../nearby-bars/nearby-bars.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
   imports: [
-    NearbyBarsComponent,
     CommonModule,
+    RouterModule,
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    RouterModule
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  providers: [AuthService]
 })
-export class HomeComponent {
-  constructor(private router: Router) { }
+export class HomeComponent implements OnInit {
+  currentUser: any;
+
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
   navigateTo(path: string) {
     this.router.navigate([`/${path}`]);
   }
 
-
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']); // Redirige a la página de inicio
+  }
 }

@@ -2,11 +2,24 @@
   <header class="brand-name p-2 header-container">
     <h1 routerLink="/"><img class="brand-logo" src="/assets/img/logo-beer.png" alt="logo" aria-hidden="true">TheLastBeer</h1>
     <div class="user-menu">
-      <button mat-button [matMenuTriggerFor]="menu"><mat-icon>person</mat-icon> Usuario</button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="navigateTo('login')">Login</button>
-        <button mat-menu-item (click)="navigateTo('register')">Registro</button>
-      </mat-menu>
+      <ng-container *ngIf="currentUser; else guestMenu">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>person</mat-icon> Hola, {{currentUser.userName}}
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="navigateTo('estadisticas')">Estadísticas</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </ng-container>
+      <ng-template #guestMenu>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>person</mat-icon> Usuario
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="navigateTo('login')">Login</button>
+          <button mat-menu-item (click)="navigateTo('register')">Registro</button>
+        </mat-menu>
+      </ng-template>
     </div>
   </header>
   <div class="content-container">

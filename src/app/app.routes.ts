@@ -5,12 +5,14 @@ import { MiniJuego2Component } from './Components/Mini-juegos/mini-juego-2/mini-
 import { RegistroComponent } from './Components/registro/registro.component';
 import { NearbyBarsComponent } from './Components/nearby-bars/nearby-bars.component';
 import { LoginComponent } from './Components/login/login.component';
+import { EstadisticasComponent } from './Components/estadisticas/estadisticas.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, children: [
         { path: '', component: NearbyBarsComponent },
         { path: 'register', component: RegistroComponent },
         { path: 'login', component: LoginComponent },
+        { path: 'estadisticas', component: EstadisticasComponent },
       ]},
     //{ path: 'home', component: HomeComponent },
     { path: 'mini-juego-1', component: MiniJuego1Component },

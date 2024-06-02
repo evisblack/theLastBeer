@@ -1,0 +1,19 @@
+<div class="full-screen-container">
+    <h1>Estdísticas de juegos</h1>
+    <div *ngIf="loading" class="loading-container">
+        <p>Cargando estadísticas...</p>
+      </div>
+      <div *ngIf="error" class="error-container">
+        <p>{{ error }}</p>
+      </div>
+      <div *ngIf="!loading && !error" class="charts-container">
+        <div class="chart">
+          <google-chart [data]="chartDataPie"></google-chart>
+        </div>
+        <div class="chart">
+          <google-chart [data]="chartDataLine"></google-chart>
+        </div>
+      </div>
+    <h2 class="pt-3">Bares Favoritos</h2>      
+</div>
+  
