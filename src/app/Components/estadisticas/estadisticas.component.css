@@ -14,7 +14,7 @@
   }
   
   .chart {
-    flex: 1 1 45%; /* Ajusta la anchura de los gráficos */
+    flex: 1 1; /* Ajusta la anchura de los gráficos */
     margin: 10px;
     min-width: 300px; /* Ancho mínimo para cada gráfico */
     padding: 20px;

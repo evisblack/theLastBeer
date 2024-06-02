@@ -1,0 +1,7 @@
+<div *ngIf="barDetails.length > 0">
+    <app-card-info [bars]="barDetails"></app-card-info>
+  </div>
+  <div *ngIf="barDetails.length === 0">
+    <p>No tienes bares favoritos.</p>
+  </div>
+  

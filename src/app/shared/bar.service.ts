@@ -17,6 +17,10 @@ export class BarService {
     return this.http.get<any[]>(`${this.apiUrl}FavouriteBars/getFavouriteBarsByUserId?userId=${userId}`);
   }
 
+  getVisitedBarsByUserId(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}VisitedBars/getVisitedBarsByUserId?userId=${userId}`);
+  }
+
   addFavoriteBar(favoriteBar: { id: number; placeId: string; name: string; userId: number }): Observable<any> {
     return this.http.post(`${this.apiUrl}FavouriteBars/addFavouriteBar`, favoriteBar);
   }

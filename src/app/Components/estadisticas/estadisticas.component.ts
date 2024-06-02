@@ -4,13 +4,20 @@ import { PuntuacionService } from '../../shared/puntuacion.service';
 import { CommonModule } from '@angular/common';
 import { Ng2GoogleChartsModule, GoogleChartInterface } from 'ng2-google-charts';
 import { Score } from '../../models/score.model';
+import { FavoriteBarsComponent } from '../favorite-bars/favorite-bars.component';
+import { VisitedBarsComponent } from '../visited-bars/visited-bars.component';
 
 @Component({
   selector: 'app-estadisticas',
   standalone: true,
   templateUrl: './estadisticas.component.html',
   styleUrls: ['./estadisticas.component.css'],
-  imports: [CommonModule, Ng2GoogleChartsModule],
+  imports: [
+    CommonModule,
+    Ng2GoogleChartsModule,
+    FavoriteBarsComponent,
+    VisitedBarsComponent
+  ],
   providers:[PuntuacionService]
 })
 export class EstadisticasComponent implements OnInit {
