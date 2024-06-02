@@ -43,9 +43,10 @@ export class CardInfoComponent implements OnInit {
       alert('Por favor, inicie sesión para marcar como favorito');
       return;
     }
+    console.log("bar", bar);
 
     if (bar.isFavorite) {
-      this.barService.removeFavoriteBar(this.userId, bar.id).subscribe({
+      this.barService.removeFavoriteBar(this.userId, bar.place_id).subscribe({
         next: (response) => {
           bar.isFavorite = false;
           console.log('Bar eliminado de favoritos', response);

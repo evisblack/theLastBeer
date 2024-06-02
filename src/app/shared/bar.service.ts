@@ -25,8 +25,8 @@ export class BarService {
     return this.http.post(`${this.apiUrl}FavouriteBars/addFavouriteBar`, favoriteBar);
   }
 
-  removeFavoriteBar(userId: number, barId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}FavouriteBars/removeFavouriteBar?userId=${userId}&barId=${barId}`);
+  removeFavoriteBar(userId: number, placeId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}FavouriteBars/removeFavouriteBar?userId=${userId}&placeId=${placeId}`);
   }
 
   addOrUpdateVisitedBar(visitedBar: { id: number; placeId: string; name: string; userId: number }): Observable<any> {

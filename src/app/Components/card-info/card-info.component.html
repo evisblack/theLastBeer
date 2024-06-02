@@ -28,7 +28,7 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button *ngIf="userId" mat-button class="favorite-button me-2" (click)="toggleFavorite(bar)" [disabled]="bar.isFavorite">
+          <button *ngIf="userId" mat-button class="favorite-button me-2" (click)="toggleFavorite(bar)">
             <mat-icon style="color:white">{{ bar.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
             <span style="color:white">Love it!</span>
           </button>
