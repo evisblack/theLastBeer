@@ -74,6 +74,7 @@ export class CardInfoComponent implements OnInit {
   }
 
   visitBar(bar: any): void {
+    window.open(bar.url, '_blank');
     if (this.userId) {
     const visitedBar = {
       id: 0,
@@ -84,7 +85,6 @@ export class CardInfoComponent implements OnInit {
     this.barService.addOrUpdateVisitedBar(visitedBar).subscribe({
       next: (response) => {
         console.log('Bar marcado como visitado', response);
-        window.open(bar.url, '_blank');
       },
       error: (error) => {
         console.error('Error al marcar bar como visitado', error);
