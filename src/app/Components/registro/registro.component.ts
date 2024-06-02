@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class RegistroComponent {
   registerForm: FormGroup;
+  loading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -46,13 +47,16 @@ export class RegistroComponent {
 
   onRegister() {
     if (this.registerForm.valid) {
+      this.loading = true;
       this.authService.register(this.registerForm.value).subscribe({
         next: (response) => {
           console.log('User registered successfully', response);
+          this.loading = false;
           this.router.navigate(['/']); // Navega a la página de inicio o a la página que prefieras
         },
         error: (error) => {
           console.error('There was an error during the registration process', error);
+          this.loading = false;
         }
       });
     }
