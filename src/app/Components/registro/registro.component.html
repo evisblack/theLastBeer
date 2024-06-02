@@ -30,7 +30,7 @@
           <mat-label>Dirección</mat-label>
           <input matInput formControlName="address">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" class="test" disabled="loading">Registrarse</button>
+        <button mat-raised-button color="primary" type="submit" class="test" [disabled]="loading">Registrarse</button>
       </form>
       <div class="spinner-container" *ngIf="loading">
         <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status">

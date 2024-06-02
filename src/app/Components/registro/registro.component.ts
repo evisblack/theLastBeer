@@ -52,7 +52,7 @@ export class RegistroComponent {
         next: (response) => {
           console.log('User registered successfully', response);
           this.loading = false;
-          this.router.navigate(['/']); // Navega a la página de inicio o a la página que prefieras
+          this.router.navigate(['/login']); 
         },
         error: (error) => {
           console.error('There was an error during the registration process', error);
