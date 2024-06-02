@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 80vh;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -75,7 +75,7 @@
 .cards-container {
   display: grid;
   gap: 10px;
-  width: 90%;
+  width: 60%;
   /* max-width: 600px; */
 }
 

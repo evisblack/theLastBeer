@@ -7,8 +7,8 @@
           <mat-icon>person</mat-icon> Hola, {{currentUser.userName}}
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="navigateTo('estadisticas')">Estadísticas</button>
-          <button mat-menu-item (click)="logout()">Logout</button>
+          <button mat-menu-item (click)="navigateTo('estadisticas')"><mat-icon>query_stats</mat-icon> Estadísticas</button>
+          <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon> Logout</button>
         </mat-menu>
       </ng-container>
       <ng-template #guestMenu>
@@ -16,8 +16,8 @@
           <mat-icon>person</mat-icon> Usuario
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="navigateTo('login')">Login</button>
-          <button mat-menu-item (click)="navigateTo('register')">Registro</button>
+          <button mat-menu-item (click)="navigateTo('login')"><mat-icon>login</mat-icon> Login</button>
+          <button mat-menu-item (click)="navigateTo('register')"><mat-icon>draw</mat-icon> Registro</button>
         </mat-menu>
       </ng-template>
     </div>

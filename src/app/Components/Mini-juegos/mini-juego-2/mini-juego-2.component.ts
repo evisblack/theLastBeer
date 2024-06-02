@@ -17,7 +17,7 @@ export class MiniJuego2Component implements OnInit{
 
   cards: Card[] = [];
   selectedCards: Card[] = [];
-  tiempoRestante: number = 10;
+  tiempoRestante: number = 15;
   private intervalId: number | null = null;
   puntuacion: number= 0;
   userId: number | null = null;
@@ -43,7 +43,7 @@ export class MiniJuego2Component implements OnInit{
   initializeGame() {
     this.cards = [];
     this.puntuacion = 0;
-    this.tiempoRestante = 10;
+    this.tiempoRestante = 15;
 
     this.images.forEach((image, index) => {
       this.cards.push({ id: index * 2, image, revealed: false, matched: false });
@@ -83,7 +83,7 @@ export class MiniJuego2Component implements OnInit{
     localStorage.setItem('puntuacion', this.puntuacion.toString());
     // Guardar la puntuación en el backend si hay un usuario logeado
     if(this.userId){
-      this.puntuacionService.saveScore(this.puntuacion, 1, this.userId).subscribe({
+      this.puntuacionService.saveScore(this.puntuacion, 2, this.userId).subscribe({
         next: response => {
           console.log('Puntuación guardada exitosamente', response);
         },
