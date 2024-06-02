@@ -69,7 +69,7 @@ export class NearbyBarsComponent implements OnInit {
     this.barService.getFavoriteBarsByUserId(this.userId!).subscribe({
       next: (favorites) => {
         this.barDetails.forEach(bar => {
-          bar.isFavorite = favorites.some((fav: any) => fav.placeId === bar.place_id);
+          bar.isFavorite = favorites.some((fav: any) => fav.bar.placeId === bar.place_id);
         });
       },
       error: (error) => {
