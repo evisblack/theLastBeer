@@ -38,7 +38,7 @@
 </div>
 <div class="row mt-4">
   <div class="col-sm-6"></div>
-  <div class="col-sm-6" *ngIf="disabled">
+  <div class="col-sm-6" *ngIf="disabled && !loading">
   <h3><em>Porque nos gusta cuidar de ti </em><mat-icon class="favorite-icon">favorite</mat-icon><em> creemos que es mejor que compruebes si es buena idea tomar otra cerveza, pero si te da igual...</em></h3>
   <mat-slide-toggle [(ngModel)]="toggleChecked" (change)="onToggleChange()">
     {{ toggleChecked ? 'Desactivar búsqueda' : 'Activar búsqueda' }}
