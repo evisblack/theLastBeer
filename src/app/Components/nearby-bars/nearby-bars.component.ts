@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { PuntuacionService } from '../../shared/puntuacion.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { BarService } from '../../shared/bar.service';
 
 @Component({
   selector: 'app-nearby-bars',
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     RouterModule,
     MatIconModule
   ],
+  providers:[BarService, PuntuacionService],
   templateUrl: './nearby-bars.component.html',
   styleUrls: ['./nearby-bars.component.css']
 })
@@ -41,16 +43,39 @@ export class NearbyBarsComponent implements OnInit {
   puntuacion: number = 0;
   toggleChecked: boolean = false;
   minijuegoRoute: string = "/mini-juego-1";
+  userId: number | null = null;
 
-  constructor(private puntuacionService: PuntuacionService) {}
+  constructor(private puntuacionService: PuntuacionService,  private barService: BarService) {}
 
   ngOnInit(): void {
     this.puntuacion = this.puntuacionService.getPuntuacion();
-    console.log("this.puntuacion:", this.puntuacion);
+    this.userId = this.getUserIdFromLocalStorage();
     this.disabled = this.puntuacion <= 500;
     const routes = ['/mini-juego-1', '/mini-juego-2'];
     const randomIndex = Math.floor(Math.random() * routes.length);
     this.minijuegoRoute = routes[randomIndex];
+  }
+
+  getUserIdFromLocalStorage(): number | null {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      return parsedUser?.result?.user?.id || null;
+    }
+    return null;
+  }
+
+  loadFavoriteBars(): void {
+    this.barService.getFavoriteBarsByUserId(this.userId!).subscribe({
+      next: (favorites) => {
+        this.barDetails.forEach(bar => {
+          bar.isFavorite = favorites.some((fav: any) => fav.placeId === bar.place_id);
+        });
+      },
+      error: (error) => {
+        console.error('Error al cargar favoritos', error);
+      }
+    });
   }
 
   initMap(): void {
@@ -89,6 +114,10 @@ export class NearbyBarsComponent implements OnInit {
           }
           this.loading = false;
           this.disabled = false;
+
+          if (this.userId) {
+            this.loadFavoriteBars();
+          }
         });
       });
     } else {

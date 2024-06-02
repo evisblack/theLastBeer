@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { BarService } from '../../shared/bar.service';
 
 @Component({
   selector: 'app-card-info',
@@ -13,13 +14,63 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatIconModule
   ],
+  providers:[BarService],
   templateUrl: './card-info.component.html',
   styleUrls: ['./card-info.component.css']
 })
-export class CardInfoComponent {
+export class CardInfoComponent implements OnInit {
   @Input() bars: any[] = [];
+  userId: number | null = null;
+
+  constructor(private barService: BarService) {}
+
+  ngOnInit(): void {
+    this.userId = this.getUserIdFromLocalStorage();
+  }
+
+  getUserIdFromLocalStorage(): number | null {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      return parsedUser?.result?.user?.id || null;
+    }
+    return null;
+  }
+
+ 
   toggleFavorite(bar: any): void {
-    bar.isFavorite = !bar.isFavorite;
+    if (!this.userId) {
+      alert('Por favor, inicie sesión para marcar como favorito');
+      return;
+    }
+
+    if (bar.isFavorite) {
+      this.barService.removeFavoriteBar(this.userId, bar.id).subscribe({
+        next: (response) => {
+          bar.isFavorite = false;
+          console.log('Bar eliminado de favoritos', response);
+        },
+        error: (error) => {
+          console.error('Error al eliminar bar de favoritos', error);
+        }
+      });
+    } else {
+      const favoriteBar = {
+        id: 0,
+        placeId: bar.place_id,
+        name: bar.name,
+        userId: this.userId
+      };
+      this.barService.addFavoriteBar(favoriteBar).subscribe({
+        next: (response) => {
+          bar.isFavorite = true;
+          console.log('Bar añadido a favoritos', response);
+        },
+        error: (error) => {
+          console.error('Error al añadir bar a favoritos', error);
+        }
+      });
+    }
   }
 
   getTodaySchedule(openingHours: any): string {
