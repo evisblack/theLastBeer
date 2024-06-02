@@ -14,14 +14,19 @@ export class PuntuacionService {
     this.apiUrl = this.configService.getApiUrl();
   }
 
-  setPuntuacion(puntuacion: number): void {
-    this.puntuacion = puntuacion;
-  }
-
-  getPuntuacion(): number {
-    return this.puntuacion;
-  }
   getScoresByUser(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}Scores/byUser/${userId}`);
   }
+
+  saveScore(points: number, gameId: number, userId: number): Observable<any> {
+    const score = {
+      userId: userId,
+      gameId: gameId,
+      points: points,
+      scoreDate: new Date().toISOString() // Fecha en UTC
+    };
+
+    return this.http.post(`${this.apiUrl}Scores`, score);
+  }
+
 }

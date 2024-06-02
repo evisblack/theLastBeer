@@ -32,7 +32,7 @@
             <mat-icon style="color:white">{{ bar.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
             <span style="color:white">Love it!</span>
           </button>
-          <a mat-button class="vamos-button" [href]="bar.url" target="_blank" style="color:white">¡Vamos!</a>
+          <button mat-button class="vamos-button" (click)="visitBar(bar)" style="color:white">¡Vamos!</button>
         </mat-card-actions>
       </mat-card>
     </div>

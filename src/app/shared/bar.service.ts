@@ -24,4 +24,8 @@ export class BarService {
   removeFavoriteBar(userId: number, barId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}FavouriteBars/removeFavouriteBar?userId=${userId}&barId=${barId}`);
   }
+
+  addOrUpdateVisitedBar(visitedBar: { id: number; placeId: string; name: string; userId: number }): Observable<any> {
+    return this.http.post(`${this.apiUrl}VisitedBars/addOrUpdateVisitedBar`, visitedBar);
+  }
 }

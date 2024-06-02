@@ -20,6 +20,7 @@ export class MiniJuego2Component implements OnInit{
   tiempoRestante: number = 10;
   private intervalId: number | null = null;
   puntuacion: number= 0;
+  userId: number | null = null;
 
   images = ['../../../assets/img/barman.png', '../../../assets/img/barra-de-bar.png', '../../../assets/img/cerveza.png', '../../../assets/img/salud.png'];
 
@@ -27,6 +28,16 @@ export class MiniJuego2Component implements OnInit{
   
   ngOnInit(): void {
     this.initializeGame();
+    this.userId = this.getUserIdFromLocalStorage();
+  }
+
+  getUserIdFromLocalStorage(): number | null {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      return parsedUser?.result?.user?.id || null;
+    }
+    return null;
   }
 
   initializeGame() {
@@ -69,7 +80,19 @@ export class MiniJuego2Component implements OnInit{
   }
 
   openDialog(): void {
-    this.puntuacionService.setPuntuacion(this.puntuacion); 
+    localStorage.setItem('puntuacion', this.puntuacion.toString());
+    // Guardar la puntuación en el backend si hay un usuario logeado
+    if(this.userId){
+      this.puntuacionService.saveScore(this.puntuacion, 1, this.userId).subscribe({
+        next: response => {
+          console.log('Puntuación guardada exitosamente', response);
+        },
+        error: error => {
+          console.error('Error al guardar la puntuación', error);
+        }
+      });
+
+    }
     const dialogRef = this.dialog.open(DialogMiniJuegosComponent, {
       data: {puntuacion : this.puntuacion},
       width: '300px',

@@ -73,6 +73,26 @@ export class CardInfoComponent implements OnInit {
     }
   }
 
+  visitBar(bar: any): void {
+    if (this.userId) {
+    const visitedBar = {
+      id: 0,
+      placeId: bar.place_id,
+      name: bar.name,
+      userId: this.userId
+    };
+    this.barService.addOrUpdateVisitedBar(visitedBar).subscribe({
+      next: (response) => {
+        console.log('Bar marcado como visitado', response);
+        window.open(bar.url, '_blank');
+      },
+      error: (error) => {
+        console.error('Error al marcar bar como visitado', error);
+      }
+    });
+  }
+  }
+
   getTodaySchedule(openingHours: any): string {
     if (!openingHours || !openingHours.weekday_text) {
       return 'N/A';
