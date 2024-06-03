@@ -1,0 +1,14 @@
+<div class="game-container">
+    <div class="header">
+      <h1 class="title">MataBirras</h1>
+      <h2 class="subtitle">¡Haz clic en la birra antes de que desaparezca!</h2>
+    </div>
+    <div class="info">
+      <h2 class="timer">{{ tiempoRestante }} segundos</h2>
+      <h2 class="score">{{ puntuacion }} pts</h2>
+    </div>
+    <div class="game-area">
+      <img *ngIf="birraVisible" [style.left.%]="birraX" [style.top.%]="birraY" src="../../../../assets/img/birra.png" class="birra" (click)="golpearBirra()">
+    </div>
+  </div>
+  

@@ -6,6 +6,7 @@ import { RegistroComponent } from './Components/registro/registro.component';
 import { NearbyBarsComponent } from './Components/nearby-bars/nearby-bars.component';
 import { LoginComponent } from './Components/login/login.component';
 import { EstadisticasComponent } from './Components/estadisticas/estadisticas.component';
+import { MiniJuego3Component } from './Components/Mini-juegos/mini-juego-3/mini-juego-3.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, children: [
@@ -16,5 +17,6 @@ export const routes: Routes = [
       ]},
     //{ path: 'home', component: HomeComponent },
     { path: 'mini-juego-1', component: MiniJuego1Component },
-    { path: 'mini-juego-2', component: MiniJuego2Component }
+    { path: 'mini-juego-2', component: MiniJuego2Component },
+    { path: 'mini-juego-3', component: MiniJuego3Component }
 ];

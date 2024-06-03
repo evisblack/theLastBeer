@@ -52,7 +52,7 @@ export class NearbyBarsComponent implements OnInit {
     this.puntuacion = storedPuntuacion ? parseInt(storedPuntuacion, 10) : 0;
     this.userId = this.getUserIdFromLocalStorage();
     this.disabled = this.puntuacion <= 500;
-    const routes = ['/mini-juego-1', '/mini-juego-2'];
+    const routes = ['/mini-juego-1', '/mini-juego-2', '/mini-juego-3'];
     const randomIndex = Math.floor(Math.random() * routes.length);
     this.minijuegoRoute = routes[randomIndex];
   }
